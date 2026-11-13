@@ -32,7 +32,7 @@ This has not been tested on a specific Processing version or operating system.
 4. Choose **File**, then **Open**, and pick **deftones.pde**.
 5. Press the **Run** button (the triangle at the top left).
 
-A 1000 by 1000 pixel black window opens and fills with white dots in the shape of the input image's edges. The default input is `cicada.jpg`, a picture of insect wings.
+A 1000 by 1000 pixel black window opens and fills with white dots in the shape of the input image's edges. The default input is `butterfly.jpg`, a drawing of a butterfly made by a short Python program in this repository.
 
 To use your own picture, put a JPEG in the same folder and change the `filename` variable near the top of `deftones.pde`. Leave off the `.jpg` ending: the code adds it.
 
@@ -40,7 +40,7 @@ The sketch has no keyboard or mouse controls.
 
 ## How it works
 
-1. The sketch loads an image (`cicada.jpg` by default).
+1. The sketch loads an image (`butterfly.jpg` by default).
 2. It runs a Canny edge detector through OpenCV. Canny is a standard method. It labels a pixel as an edge when brightness changes sharply around it. The two numbers in `findCannyEdges(20,75)` are the low and high thresholds.
 3. It stretches the edge map to 1000 by 1000 pixels and keeps every tenth pixel, which reduces it to a 100 by 100 grid.
 4. It draws a circle wherever the reduced pixel is bright enough.
@@ -48,13 +48,13 @@ The sketch has no keyboard or mouse controls.
 | File | What is in it |
 |---|---|
 | `deftones.pde` | The whole sketch |
-| `cicada.jpg` | The default input image |
-| `doge.jpg` | A second input image, not used by default |
+| `butterfly.jpg` | The default input image |
+| `tools/make_butterfly.py` | The Python program that draws `butterfly.jpg` |
 
 ## Ideas to try
 
 1. In `deftones.pde`, change `ellipseSize` for bigger or smaller dots, or `intervalCount` for a denser or sparser grid.
-2. Try the second image. In `deftones.pde`, change `filename` from `"cicada"` to `"doge"`.
+2. Make a new input image. Change the colours, spots or curve in `tools/make_butterfly.py` and run `python3 tools/make_butterfly.py` (it needs the Pillow library: `pip install pillow`). See how each change alters the dots.
 3. Change the edge thresholds. In `deftones.pde`, try other values in `findCannyEdges(20,75)`. Lower numbers find more edges.
 4. Colour the dots. Before the `ellipse` call in `draw`, add a `fill` call that takes its colour from the original image `img` at the same position.
 5. Save the result. Add a `keyPressed` function to `deftones.pde` that calls `saveFrame()` when you press `s`.
@@ -77,14 +77,13 @@ The image is resized to a square before sampling, so a picture that is not squar
 
 This is a small experiment with no tests. Known problems:
 
-- `cicada.jpg` is a stock photo preview that still carries the stock site's watermark. It is unlikely to be covered by this repository's MIT licence. Use your own image if you share your results.
 - The margin crops the image (see "Technical details").
 - The sketch redraws the same dots every frame. It could draw once in `setup` instead.
 
 ## Licence
 
-You can use, copy and change the code for any purpose, as long as you keep the copyright notice. See [LICENSE](LICENSE) (MIT). The licence covers the code. The example images may belong to other people.
+You can use, copy and change the code for any purpose, as long as you keep the copyright notice. See [LICENSE](LICENSE) (MIT). The licence covers the code and `butterfly.jpg`, which was drawn by `tools/make_butterfly.py`.
 
 ## Credits
 
-Written by Abhishek Shivakumar. Built with [Processing](https://processing.org/) and [OpenCV for Processing](https://github.com/atduskgreg/opencv-processing) by Greg Borenstein. The style is inspired by the artwork for the Deftones album *Ohms*. To cite this work, see [CITATION.cff](CITATION.cff).
+Written by Abhishek Shivakumar. Built with [Processing](https://processing.org/) and [OpenCV for Processing](https://github.com/atduskgreg/opencv-processing) by Greg Borenstein. The butterfly outline in `butterfly.jpg` is based on Temple H. Fay's butterfly curve (1989), drawn by `tools/make_butterfly.py` in this repository. The style is inspired by the artwork for the Deftones album *Ohms*. To cite this work, see [CITATION.cff](CITATION.cff).

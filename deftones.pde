@@ -17,7 +17,7 @@ PImage new_image;
 
 PImage final_image;
 
-String filename = "cicada";
+String filename = "butterfly";
 
 void setup()
 {
